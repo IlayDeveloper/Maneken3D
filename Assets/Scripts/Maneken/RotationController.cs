@@ -12,12 +12,14 @@ public class RotationController : MonoBehaviour {
 	private float oldAngleZ;
 	private GameObject nodeGo;
 
-	void OnMouseDown()
+	void Start ()
 	{
 		sliderX = GameObject.Find("SliderX");
 		sliderY = GameObject.Find("SliderY");
 		sliderZ = GameObject.Find("SliderZ");
-
+	}
+	void OnMouseDown()
+	{
 		if (gameObject.CompareTag("Node")){
 			nodeGo = this.gameObject;
 			this.ActivateSliders();
@@ -32,7 +34,6 @@ public class RotationController : MonoBehaviour {
 
 	void RotateX (float value)
 	{
-		Debug.Log("value - " + value.ToString() +  "OldValue - " + oldAngleX);
 		transform.Rotate( new Vector3(value - oldAngleX, 0, 0));
 		oldAngleX = value;
 	
