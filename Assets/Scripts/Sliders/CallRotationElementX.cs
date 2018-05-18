@@ -26,6 +26,16 @@ public class CallRotationElementX : MonoBehaviour {
 		}
 	}
 
+	public void SetConstraintMaxSlider (float value)
+	{
+		this.sl.maxValue = value;
+	}
+
+	public void SetConstraintMinSlider (float value)
+	{
+		this.sl.minValue = value;
+	}
+
 	public void Activate (GameObject newGo)
 	{	
 		go = newGo;

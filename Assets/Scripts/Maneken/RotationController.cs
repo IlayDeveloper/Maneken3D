@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class RotationController : MonoBehaviour {
 
+	public float ConstraintXMax;
+	public float ConstraintYMax;
+	public float ConstraintZMax;
+	public float ConstraintXMin;
+	public float ConstraintYMin;
+	public float ConstraintZMin;
 	private GameObject sliderX;
 	private GameObject sliderY;
 	private GameObject sliderZ;
@@ -23,11 +29,13 @@ public class RotationController : MonoBehaviour {
 		if (gameObject.CompareTag("Node")){
 			nodeGo = this.gameObject;
 			this.ActivateSliders();
-			this.TranslateValueSlider ();
+			this.TranslateValueSlider();
+			this.InstallConstraintSlider();
 		} else {
 			nodeGo = this.gameObject.transform.parent.gameObject;
 			this.ActivateSliders();
 			nodeGo.SendMessage("TranslateValueSlider");
+			nodeGo.SendMessage("InstallConstraintSlider");
 		}
 
 	}
@@ -56,6 +64,16 @@ public class RotationController : MonoBehaviour {
 		sliderX.SendMessage("SetValueSlider", this.oldAngleX);
 		sliderY.SendMessage("SetValueSlider", this.oldAngleY);
 		sliderZ.SendMessage("SetValueSlider", this.oldAngleZ);
+	}
+
+	protected void InstallConstraintSlider ()
+	{
+		sliderX.SendMessage("SetConstraintMaxSlider", this.ConstraintXMax);
+		sliderY.SendMessage("SetConstraintMaxSlider", this.ConstraintYMax);
+		sliderZ.SendMessage("SetConstraintMaxSlider", this.ConstraintZMax);
+		sliderX.SendMessage("SetConstraintMinSlider", this.ConstraintXMin);
+		sliderY.SendMessage("SetConstraintMinSlider", this.ConstraintYMin);
+		sliderZ.SendMessage("SetConstraintMinSlider", this.ConstraintZMin);
 	}
 
 	protected void ActivateSliders ()
